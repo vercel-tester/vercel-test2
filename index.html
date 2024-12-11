@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Cost Calculator Test</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>COSTULUS DEMO 0.000001 BETA</h1>
+
+    <form id="calculatorForm">
+        <input type="number" id="productCost" placeholder="Ürün Maliyeti" required><br>
+        <input type="number" id="operationalCosts" placeholder="Operasyonel Giderler" required><br>
+        <input type="number" id="marketingCosts" placeholder="Pazarlama Maliyetleri" required><br>
+        <input type="number" id="logisticsFees" placeholder="Lojistik Ücretleri" required><br>
+        <input type="number" id="platformCommissions" placeholder="Platform Komisyonları" required><br>
+        <input type="number" id="salesPrice" placeholder="Satış Fiyatı" required><br>
+        <input type="number" id="taxRate" placeholder="Vergi Oranı" required><br>
+        <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
+        <button type="button" onclick="testCalculate()">Hesapla</button>
+    </form>
+
+    <div id="results">
+        <h2>Sonuçlar</h2>
+        <p>Toplam Giderler: <span id="totalCosts"></span></p>
+        <p>Kâr Marjı: <span id="profitMargin"></span></p>
+        <p>Vergi Miktarı: <span id="taxAmount"></span></p>
+        <p>Net Kâr: <span id="netProfit"></span></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
