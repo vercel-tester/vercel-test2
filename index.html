@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Cost Calculator Test</title>
-    <script src="script.js"></script>
 </head>
 <body>
     <h1>COSTULUS DEMO 0.000001 BETA</h1>
@@ -17,7 +16,7 @@
         <input type="number" id="salesPrice" placeholder="Satış Fiyatı" required><br>
         <input type="number" id="taxRate" placeholder="Vergi Oranı" required><br>
         <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
-        <button type="button" onclick="testCalculate()">Hesapla</button>
+        <button type="button" onclick="calculate()">Hesapla</button>
     </form>
 
     <div id="results">
@@ -28,6 +27,51 @@
         <p>Net Kâr: <span id="netProfit"></span></p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        async function calculate() {
+            const productCost = document.getElementById("productCost").value;
+            const operationalCosts = document.getElementById("operationalCosts").value;
+            const marketingCosts = document.getElementById("marketingCosts").value;
+            const logisticsFees = document.getElementById("logisticsFees").value;
+            const platformCommissions = document.getElementById("platformCommissions").value;
+            const salesPrice = document.getElementById("salesPrice").value;
+            const taxRate = document.getElementById("taxRate").value;
+            const unitsSold = document.getElementById("unitsSold").value;
+
+            try {
+                const response = await fetch('/api/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        productCost,
+                        operationalCosts,
+                        marketingCosts,
+                        logisticsFees,
+                        platformCommissions,
+                        salesPrice,
+                        taxRate,
+                        unitsSold
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Hesaplama sırasında bir hata oluştu.");
+                }
+
+                const results = await response.json();
+
+                document.getElementById("totalCosts").textContent = results.totalCosts;
+                document.getElementById("profitMargin").textContent = results.profitMargin;
+                document.getElementById("taxAmount").textContent = results.taxAmount;
+                document.getElementById("netProfit").textContent = results.netProfit;
+
+            } catch (error) {
+                console.error(error);
+                alert("Bir hata oluştu, lütfen tekrar deneyin.");
+            }
+        }
+    </script>
 </body>
 </html>
