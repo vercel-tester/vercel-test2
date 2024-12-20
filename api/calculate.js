@@ -1,4 +1,3 @@
-// calculate.js
 export default function handler(req, res) {
     if (req.method === "POST") {
         const {
@@ -29,7 +28,6 @@ export default function handler(req, res) {
         const activityProfit = grossProfit - totalPlatformCommissions; // Faaliyet kârı (brüt kâr - platform komisyonları)
         const profitMargin = (activityProfit / totalRevenue) * 100; // Kâr marjı (%)
         const costPerUnit = totalCosts / units; // Birim başına maliyet
-        const suggestedSalesPrice = costPerUnit * 1.2; // Satış fiyatı önerisi (örnek: %20 kâr marjı için)
 
         res.status(200).json({
             totalCosts: totalCosts.toFixed(2),
@@ -37,8 +35,7 @@ export default function handler(req, res) {
             grossProfit: grossProfit.toFixed(2),
             activityProfit: activityProfit.toFixed(2),
             profitMargin: profitMargin.toFixed(2),
-            costPerUnit: costPerUnit.toFixed(2),
-            suggestedSalesPrice: suggestedSalesPrice.toFixed(2)
+            costPerUnit: costPerUnit.toFixed(2)
         });
     } else {
         res.status(405).json({ message: "Only POST requests are allowed" });
