@@ -20,6 +20,7 @@ header {
 }
 
 h1 {    
+    font-weight: 900; 
     margin-left: 100px;
     margin-top: -10px; 
     color: #333; 
