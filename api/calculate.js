@@ -22,7 +22,7 @@ export default function handler(req, res) {
         // Hesaplamalar
         const totalCosts = totalProductCost + totalOperationalCosts + totalMarketingCosts + totalLogisticsFees;
         const totalRevenue = salesPricePerUnit * units; // Toplam gelir
-        const platformDeductions = totalPlatformCommissions * totalRevenue; // Platform kesintisi
+        const platformDeductions = totalPlatformCommissions * totalRevenue / 100; // Platform kesintisi
         const grossProfit = totalRevenue - productCost; // Brüt kâr
         const activityProfit = grossProfit - platformDeductions; // Faaliyet kârı
         const profitMargin = (activityProfit / totalRevenue) * 100; // Kâr marjı (%)
