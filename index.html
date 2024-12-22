@@ -2,7 +2,6 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Costulus</title>
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
@@ -16,58 +15,47 @@
 
     <h1>COSTULUS</h1>
 
-    <!-- Hesaplama Formu -->
     <form id="calculatorForm">
-        <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
         <input type="number" id="productCost" placeholder="Ürün Maliyeti" required><br>
         <input type="number" id="operationalCosts" placeholder="Operasyonel Giderler" required><br>
         <input type="number" id="marketingCosts" placeholder="Pazarlama Maliyetleri" required><br>
         <input type="number" id="logisticsFees" placeholder="Lojistik Ücretleri" required><br>
         <input type="number" id="platformCommissions" placeholder="Platform Komisyonları" required><br>
         <input type="number" id="salesPrice" placeholder="Satış Fiyatı" required><br>
+        <input type="number" id="taxRate" placeholder="Vergi Oranı" required><br>
+        <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
         <button type="button" onclick="testCalculate()">Hesapla</button>
     </form>
 
-    <!-- Sonuçlar -->
-    <div id="results" style="display: none;">
+    <div id="results">
         <h2>Sonuçlar</h2>
-        <p>Toplam Maliyet: <span id="totalCosts">0</span></p>
-        <p>Toplam Gelir: <span id="totalRevenue">0</span></p>
-        <p>Brüt Kâr: <span id="grossProfit">0</span></p>
-        <p>Platform Kesintisi: <span id="platformOutage">0</span></p>
-        <p>Faaliyet Kârı: <span id="activityProfit">0</span></p>
-        <p>Kâr Marjı (%): <span id="profitMargin">0</span></p>
-        <p>Ortalama Maliyet: <span id="costPerUnit">0</span></p>
+        <p>Toplam Maliyet: <span id="totalCosts"></span></p>
+        <p>Toplam Gelir: <span id="totalRevenue"></span></p>
+        <p>Brüt Kâr: <span id="grossProfit"></span></p>
+        <p>Faaliyet Kârı: <span id="activityProfit"></span></p>
+        <p>Kâr Marjı (%): <span id="profitMargin"></span></p>
+        <p>Birim Başına Maliyet: <span id="costPerUnit"></span></p>
     </div>
 
-    <!-- Footer -->
-    <footer>
+    <header>
         <a href="https://x.com/nicojacksonn_" target="_blank">Nico Jackson's Twitter</a><br>
         <a href="https://x.com/mikail796955" target="_blank">Mikail's Twitter</a><br>
         <a href="https://x.com/adamhamondx" target="_blank">Adam's Twitter</a>
-    </footer>
+    </header>
 
-    <div style="height: 4000px;"></div>
-
-    <!-- JavaScript -->
     <script>
         async function testCalculate() {
-            const productCost = parseFloat(document.getElementById("productCost").value) || 0;
-            const operationalCosts = parseFloat(document.getElementById("operationalCosts").value) || 0;
-            const marketingCosts = parseFloat(document.getElementById("marketingCosts").value) || 0;
-            const logisticsFees = parseFloat(document.getElementById("logisticsFees").value) || 0;
-            const platformCommissions = parseFloat(document.getElementById("platformCommissions").value) || 0;
-            const salesPrice = parseFloat(document.getElementById("salesPrice").value) || 0;
-            const unitsSold = parseInt(document.getElementById("unitsSold").value) || 0;
-
-            // Verilerin eksik olup olmadığını kontrol edin
-            if (!unitsSold || !salesPrice) {
-                alert("Lütfen tüm alanları doldurun ve geçerli değerler girin!");
-                return;
-            }
+            const productCost = document.getElementById("productCost").value;
+            const operationalCosts = document.getElementById("operationalCosts").value;
+            const marketingCosts = document.getElementById("marketingCosts").value;
+            const logisticsFees = document.getElementById("logisticsFees").value;
+            const platformCommissions = document.getElementById("platformCommissions").value;
+            const salesPrice = document.getElementById("salesPrice").value;
+            const taxRate = document.getElementById("taxRate").value;
+            const unitsSold = document.getElementById("unitsSold").value;
 
             try {
-                const response = await fetch('http://localhost:3000/api/calculate', { // Backend URL
+                const response = await fetch('/api/calculate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -79,7 +67,8 @@
                         logisticsFees,
                         platformCommissions,
                         salesPrice,
-                        unitsSold,
+                        taxRate,
+                        unitsSold
                     }),
                 });
 
@@ -90,15 +79,13 @@
                 const results = await response.json();
 
                 // Sonuçları güncelle
-                document.getElementById("totalCosts").textContent = results.totalCosts || 0;
-                document.getElementById("totalRevenue").textContent = results.totalRevenue || 0;
-                document.getElementById("grossProfit").textContent = results.grossProfit || 0;
-                document.getElementById("activityProfit").textContent = results.activityProfit || 0;
-                document.getElementById("profitMargin").textContent = results.profitMargin || 0;
-                document.getElementById("costPerUnit").textContent = results.costPerUnit || 0;
-
-                // Sonuçlar div'ini göster
-                document.getElementById("results").style.display = "block";
+                document.getElementById("totalCosts").textContent = results.totalCosts;
+                document.getElementById("totalRevenue").textContent = results.totalRevenue;
+                document.getElementById("grossProfit").textContent = results.grossProfit;
+                document.getElementById("activityProfit").textContent = results.activityProfit;
+                document.getElementById("profitMargin").textContent = results.profitMargin + "%";
+                document.getElementById("costPerUnit").textContent = results.costPerUnit;
+                document.getElementById("suggestedSalesPrice").textContent = results.suggestedSalesPrice;
             } catch (error) {
                 console.error(error);
                 alert("Bir hata oluştu, lütfen tekrar deneyin.");
