@@ -1,15 +1,14 @@
 
 .logo {
-    width: 75px; 
+    width: 90px; 
     height: auto; 
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 30px;
+    left: 70px;
 }
 
 
 body {
-    font-family: "Inter", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -18,31 +17,24 @@ header {
     padding: 20px;
     text-align: left;
 }
-
-h1 {
-    font-weight: 900;
-    font-size: 40px;    
-    text-align: center;
-    margin-top: -10px;
-    color: #000000; 
-}
-
 .title-main{
+    font-family: "Inter", sans-serif;
     font-weight: 900;
-    font-size: 40px;    
+    font-size: 60px;    
     text-align: center;
     margin-top: -10px;
     color: #000000;
 }
 
 .title-sub{
+    font-family: 'Libre Franklin', sans-serif ;
     font-weight: 900;
     font-size: 40px;    
-    text-align: center;
-    margin-top: -10px; 
+    margin-left: 70px;
+    margin-top: 100px; 
     color: #000000; 
     margin-bottom: 800px;
-    
+    -webkit-text-stroke: 1.5px #000;
 }
 #content {
     max-height: 500px; 
@@ -50,11 +42,11 @@ h1 {
 }
 
 .header-image {
-    width: 200px;
+    width: 300px;
     height: auto;
     position: absolute;
     top: 40px;
-    right: 10px; 
+    right: 70px; 
 }
 
 
