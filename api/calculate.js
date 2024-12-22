@@ -20,7 +20,7 @@ export default function handler(req, res) {
         const salesPricePerUnit = parseFloat(salesPrice);
 
         // Hesaplamalar
-        const totalCosts = totalProductCost + totalOperationalCosts + totalMarketingCosts + totalLogisticsFees + totalPlatformCommissions;
+        const totalCosts = totalProductCost + totalOperationalCosts + totalMarketingCosts + totalLogisticsFees;
         const totalRevenue = salesPricePerUnit * units; // Toplam gelir
         const platformDeductions = totalPlatformCommissions * units; // Platform kesintisi
         const grossProfit = totalRevenue - totalCosts; // Brüt kâr
