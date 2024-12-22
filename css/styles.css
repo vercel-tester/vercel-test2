@@ -36,6 +36,37 @@ header {
     margin-bottom: 800px;
     -webkit-text-stroke: 1.5px #000;
 }
+
+
+.title-sub2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; 
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 100px;
+    color: #000000;
+    font-style: italic; 
+}
+
+.title-sub2 .bold {
+    font-weight: 900;
+}
+
+.title-sub2 .italic {
+    font-style: italic;
+}
+
+
+.title-sub2 .italic.bold {
+    font-weight: 900;
+    font-style: italic; 
+}
+
+
+.title-sub2 .bold {
+    font-style: normal;
+}
+
 #content {
     max-height: 500px; 
     overflow-y: auto; 
