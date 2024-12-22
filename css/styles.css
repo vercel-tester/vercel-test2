@@ -20,7 +20,7 @@ header {
 .title-main{
     font-family: "Inter", sans-serif;
     font-weight: 900;
-    font-size: 60px;    
+    font-size: 55px;    
     text-align: center;
     margin-top: -10px;
     color: #000000;
@@ -29,18 +29,17 @@ header {
 .title-sub{
     font-family: 'Libre Franklin', sans-serif ;
     font-weight: 900;
-    font-size: 40px;    
+    font-size: 50px;    
     margin-left: 70px;
     margin-top: 100px; 
     color: #000000; 
     -webkit-text-stroke: 1.5px #000;
 }
 
-
 .title-sub2 {
     font-family: 'Inter', sans-serif;
     font-weight: 400; 
-    font-size: 20px;
+    font-size: 25px;
     margin-left: 50px;
     margin-top: 10px;
     color: #000000;
@@ -64,6 +63,15 @@ header {
 
 .title-sub2 .bold {
     font-style: normal;
+}
+
+.right-center-image {
+    position: absolute;
+    margin-top: -120px;
+    right: 200px; 
+    transform: translateY(-50%);
+    width: auto;
+    height: 400px;
 }
 
 #content {
