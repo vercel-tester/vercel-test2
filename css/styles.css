@@ -26,4 +26,11 @@ h1 {
     margin-top: -10px;
     color: #000000; 
 }
-#c
+.header-image {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 40px;
+    right: 10px; 
+}
+
