@@ -26,6 +26,13 @@ h1 {
     margin-top: -10px;
     color: #000000; 
 }
+
+
+#content {
+    max-height: 500px; 
+    overflow-y: auto; 
+}
+
 .header-image {
     width: 200px;
     height: auto;
