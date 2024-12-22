@@ -16,14 +16,13 @@
     <h1>COSTULUS</h1>
 
     <form id="calculatorForm">
+        <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
         <input type="number" id="productCost" placeholder="Ürün Maliyeti" required><br>
         <input type="number" id="operationalCosts" placeholder="Operasyonel Giderler" required><br>
         <input type="number" id="marketingCosts" placeholder="Pazarlama Maliyetleri" required><br>
         <input type="number" id="logisticsFees" placeholder="Lojistik Ücretleri" required><br>
         <input type="number" id="platformCommissions" placeholder="Platform Komisyonları" required><br>
         <input type="number" id="salesPrice" placeholder="Satış Fiyatı" required><br>
-        <input type="number" id="taxRate" placeholder="Vergi Oranı" required><br>
-        <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
         <button type="button" onclick="testCalculate()">Hesapla</button>
     </form>
 
@@ -33,6 +32,7 @@
         <p>Toplam Gelir: <span id="totalRevenue"></span></p>
         <p>Brüt Kâr: <span id="grossProfit"></span></p>
         <p>Faaliyet Kârı: <span id="activityProfit"></span></p>
+        <p>Platform Kesintisi: <span id="platformDeductions"></span></p>
         <p>Kâr Marjı (%): <span id="profitMargin"></span></p>
         <p>Birim Başına Maliyet: <span id="costPerUnit"></span></p>
     </div>
@@ -45,14 +45,13 @@
 
     <script>
         async function testCalculate() {
+            const unitsSold = document.getElementById("unitsSold").value;
             const productCost = document.getElementById("productCost").value;
             const operationalCosts = document.getElementById("operationalCosts").value;
             const marketingCosts = document.getElementById("marketingCosts").value;
             const logisticsFees = document.getElementById("logisticsFees").value;
             const platformCommissions = document.getElementById("platformCommissions").value;
             const salesPrice = document.getElementById("salesPrice").value;
-            const taxRate = document.getElementById("taxRate").value;
-            const unitsSold = document.getElementById("unitsSold").value;
 
             try {
                 const response = await fetch('/api/calculate', {
@@ -61,14 +60,13 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
+                        unitsSold,
                         productCost,
                         operationalCosts,
                         marketingCosts,
                         logisticsFees,
                         platformCommissions,
-                        salesPrice,
-                        taxRate,
-                        unitsSold
+                        salesPrice
                     }),
                 });
 
@@ -83,9 +81,9 @@
                 document.getElementById("totalRevenue").textContent = results.totalRevenue;
                 document.getElementById("grossProfit").textContent = results.grossProfit;
                 document.getElementById("activityProfit").textContent = results.activityProfit;
+                document.getElementById("platformDeductions").textContent = results.platformDeductions;
                 document.getElementById("profitMargin").textContent = results.profitMargin + "%";
                 document.getElementById("costPerUnit").textContent = results.costPerUnit;
-                document.getElementById("suggestedSalesPrice").textContent = results.suggestedSalesPrice;
             } catch (error) {
                 console.error(error);
                 alert("Bir hata oluştu, lütfen tekrar deneyin.");
