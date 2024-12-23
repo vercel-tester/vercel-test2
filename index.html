@@ -2,13 +2,17 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Costulus</title>
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;600&display=swap" rel="stylesheet">		
 </head>
 <body>
-    
+    <!-- Background Image -->
+    <img src="images/background.png" alt="Background Image" class="background-image">
+
+    <!-- Logo -->
     <header>
         <img src="images/logo-costulus.png" alt="Costulus Logosu" class="logo">
         <img src="images/calculate-costs-now.png" alt="Calculate Costs Now" class="header-image">
@@ -16,23 +20,26 @@
 
     <h1 class="title-main">COSTULUS</h1>
 
+    <div class="content-container">
+        <div class="text-container">
+            <h1 class="title-sub">Easily Calculate Your<br>E-Commerce Costs!</h1>
+            <h1 class="title-sub2">
+                <span class="italic bold">Costulus</span> is here to <span class="bold">simplify</span> cost estimation<br>
+                for entrepreneurs in e-commerce, using a<br> powerful, <span class="bold">easy-to-use algorithm</span>.
+            </h1>
+        </div>
+        <img src="images/image.png" alt="Image" class="right-center-image">
+    </div>
 
-    <h1 class="title-sub">Easily Calculate Your<br>E-Commerce Costs!</h1>
-<h1 class="title-sub2">
-    <span class="italic bold">Costulus</span> is here to <span class="bold">simplify</span> cost estimation<br>
-    for entrepreneurs in e-commerce, using a<br> powerful, <span class="bold">easy-to-use algorithm</span>.
-</h1>
-
-    <img src="images/image.png" alt="Image" class="right-center-image">
-    
     <form id="calculatorForm">
-        <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
         <input type="number" id="productCost" placeholder="Ürün Maliyeti" required><br>
         <input type="number" id="operationalCosts" placeholder="Operasyonel Giderler" required><br>
         <input type="number" id="marketingCosts" placeholder="Pazarlama Maliyetleri" required><br>
         <input type="number" id="logisticsFees" placeholder="Lojistik Ücretleri" required><br>
         <input type="number" id="platformCommissions" placeholder="Platform Komisyonları" required><br>
         <input type="number" id="salesPrice" placeholder="Satış Fiyatı" required><br>
+        <input type="number" id="taxRate" placeholder="Vergi Oranı" required><br>
+        <input type="number" id="unitsSold" placeholder="Ürün Adedi" required><br>
         <button type="button" onclick="testCalculate()">Hesapla</button>
     </form>
 
@@ -41,29 +48,30 @@
         <p>Toplam Maliyet: <span id="totalCosts"></span></p>
         <p>Toplam Gelir: <span id="totalRevenue"></span></p>
         <p>Brüt Kâr: <span id="grossProfit"></span></p>
-        <p>Platform Kesintisi: <span id="platformDeductions"></span></p>
         <p>Faaliyet Kârı: <span id="activityProfit"></span></p>
         <p>Kâr Marjı (%): <span id="profitMargin"></span></p>
         <p>Birim Başına Maliyet: <span id="costPerUnit"></span></p>
     </div>
 
-    <header>
+    <footer>
         <a href="https://x.com/nicojacksonn_" target="_blank">Nico Jackson's Twitter</a><br>
         <a href="https://x.com/mikail796955" target="_blank">Mikail's Twitter</a><br>
         <a href="https://x.com/adamhamondx" target="_blank">Adam's Twitter</a>
-    </header>
+    </footer>
 
-        
+    <div style="height: 4000px;">
+    </div>
 
     <script>
         async function testCalculate() {
-            const unitsSold = document.getElementById("unitsSold").value;
             const productCost = document.getElementById("productCost").value;
             const operationalCosts = document.getElementById("operationalCosts").value;
             const marketingCosts = document.getElementById("marketingCosts").value;
             const logisticsFees = document.getElementById("logisticsFees").value;
             const platformCommissions = document.getElementById("platformCommissions").value;
             const salesPrice = document.getElementById("salesPrice").value;
+            const taxRate = document.getElementById("taxRate").value;
+            const unitsSold = document.getElementById("unitsSold").value;
 
             try {
                 const response = await fetch('/api/calculate', {
@@ -72,13 +80,14 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        unitsSold,
                         productCost,
                         operationalCosts,
                         marketingCosts,
                         logisticsFees,
                         platformCommissions,
-                        salesPrice
+                        salesPrice,
+                        taxRate,
+                        unitsSold
                     }),
                 });
 
@@ -93,14 +102,15 @@
                 document.getElementById("totalRevenue").textContent = results.totalRevenue;
                 document.getElementById("grossProfit").textContent = results.grossProfit;
                 document.getElementById("activityProfit").textContent = results.activityProfit;
-                document.getElementById("platformDeductions").textContent = results.platformDeductions;
                 document.getElementById("profitMargin").textContent = results.profitMargin + "%";
                 document.getElementById("costPerUnit").textContent = results.costPerUnit;
+                document.getElementById("suggestedSalesPrice").textContent = results.suggestedSalesPrice;
             } catch (error) {
                 console.error(error);
                 alert("Bir hata oluştu, lütfen tekrar deneyin.");
             }
         }
     </script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
