@@ -29,7 +29,7 @@ body {
     z-index: 1;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 780px) {
     .logo {
         width: 40px;
         height: auto;   
@@ -235,9 +235,9 @@ header {
     right: 5%;
     z-index: 1;
 }
-@media (max-width: 680px) {
+@media (max-width: 780px) {
     .header-image{
-        width: 100px; 
+        width: 150px; 
     }
 }
 @media (max-width: 480px) {
