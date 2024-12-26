@@ -10,7 +10,7 @@ export default function handler(req, res) {
             salesPrice
         } = req.body;
 
-        // Tüm değerleri sayıya çevirme
+
         const units = parseInt(unitsSold);
         const totalProductCost = parseFloat(productCost);
         const totalOperationalCosts = parseFloat(operationalCosts);
@@ -21,12 +21,12 @@ export default function handler(req, res) {
 
         // Hesaplamalar
         const totalCosts = totalProductCost + totalOperationalCosts + totalMarketingCosts + totalLogisticsFees;
-        const totalRevenue = salesPricePerUnit * units; // Toplam gelir
-        const platformDeductions = totalPlatformCommissions * totalRevenue / 100; // Platform kesintisi
-        const grossProfit = totalRevenue - productCost; // Brüt kâr
-        const activityProfit = grossProfit - totalCosts + totalProductCost - platformDeductions ; // Faaliyet kârı
-        const profitMargin = (activityProfit / totalRevenue) * 100; // Kâr marjı (%)
-        const costPerUnit = totalCosts / units; // Birim başına maliyet
+        const totalRevenue = salesPricePerUnit * units;
+        const platformDeductions = totalPlatformCommissions * totalRevenue / 100;
+        const grossProfit = totalRevenue - productCost; 
+        const activityProfit = grossProfit - totalCosts + totalProductCost - platformDeductions ; 
+        const profitMargin = (activityProfit / totalRevenue) * 100; 
+        const costPerUnit = totalCosts / units; 
 
         res.status(200).json({
             totalCosts: totalCosts.toFixed(2),
