@@ -253,3 +253,175 @@ header {
     height: auto;
     cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Product Cost için stil */
+.input-productCost::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    
+}
+
+.label-productCost {
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Units Sold için stil */
+.input-unitsSold::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.label-unitsSold {
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Operational Costs için stil */
+.input-operationalCosts::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.label-operationalCosts {
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Marketing Costs için stil */
+.input-marketingCosts::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.label-marketingCosts {
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Logistics Fees için stil */
+.input-logisticsFees::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.label-logisticsFees {
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Platform Commissions için stil */
+.input-platformCommissions::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.label-platformCommissions {
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Selling Price için stil */
+.input-salesPrice::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.label-salesPrice {
+    font-weight: 600;
+    color: #000;
+    margin-top: 10px;
+    display: block;
+}
+
+.form-container {
+    display: grid;
+    gap: 20px; /* Satırlar arası boşluk */
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; /* Merkezi hizalama */
+    grid-template-columns: repeat(3, 1fr); /* Tüm satırlarda 3 sütun */
+}
+
+.form-row {
+    display: contents; /* Satır yapısını bozmak için contents kullanıyoruz */
+}
+
+.form-row:nth-child(2) {
+    grid-template-columns: repeat(2, 1fr); /* Orta sıra: 2 kolon */
+}
+
+.form-row:nth-child(3) {
+    grid-template-columns: repeat(2, 1fr); 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 10px;
+    width: 167px;
+    height: 41px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+}
+
+
+.placeholder {
+    grid-column: span 1;
+    visibility: hidden;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
