@@ -409,21 +409,30 @@ input {
     visibility: hidden;
 }
 
+/* Butonun etrafındaki kapsayıcıyı ortalayalım */
+.button-container {
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    grid-column: span 3; /* Butonun bulunduğu satırı iki sütun olarak ayarlıyoruz */
+    margin-top: 20px; /* Buton ile önceki elemanlar arasında boşluk */
+}
+
+/* Butonun genel stilleri */
 button {
-    display: block;
-    margin: 20px auto;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #007BFF;
+    background-color: #808080; /* Gri renk */
     color: white;
     border: none;
     border-radius: 4px;
+    width: auto; /* Butonun genişliğini içerik kadar yapalım */
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #6c6c6c; /* Gri rengin biraz daha koyusu */
 }
+
 
 
 
