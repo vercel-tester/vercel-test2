@@ -394,12 +394,13 @@ label {
 
 input {
     padding: 10px;
-    width: 167px;
-    height: 41px;
+    width: 190px;
+    height: 44px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-family: 'Inter', sans-serif;
-    font-size: 9px;
+    font-size: 16px;
+    color: #000;
 }
 
 
@@ -422,6 +423,13 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+
+
+input::placeholder {
+    font-size: 10px;
+    color: #999;  
 }
 
 
