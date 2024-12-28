@@ -43,16 +43,52 @@
         <img src="images/image.png" alt="Image" class="right-center-image">
     </div>
 
-    <form id="calculatorForm">
-        <input type="number" id="unitsSold" placeholder="Product Quantity" required><br>
-        <input type="number" id="productCost" placeholder="Product Cost" required><br>
-        <input type="number" id="operationalCosts" placeholder="Operational Expenses" required><br>
-        <input type="number" id="marketingCosts" placeholder="Marketing Costs" required><br>
-        <input type="number" id="logisticsFees" placeholder="Logistics Fees" required><br>
-        <input type="number" id="platformCommissions" placeholder="Platform Commissions" required><br>
-        <input type="number" id="salesPrice" placeholder="Selling Price" required><br>
-        <button type="button" onclick="testCalculate()">Calculate</button>
-    </form>
+<form id="calculatorForm" class="form-container">
+    <!-- Up: Product Quantity, Product Cost, Selling Price -->
+    <div class="form-row">
+        <div class="form-group">
+            <label for="unitsSold" class="label-unitsSold">Product Quantity</label>
+            <input type="number" id="unitsSold" placeholder="Enter your product quantity (e.g., 150)" class="input-unitsSold" required>
+        </div>
+        <div class="form-group">
+            <label for="productCost" class="label-productCost">Product Cost</label>
+            <input type="number" id="productCost" placeholder="Enter your product cost (e.g., $15)" class="input-productCost" required>
+        </div>
+        <div class="form-group">
+            <label for="salesPrice" class="label-salesPrice">Selling Price</label>
+            <input type="number" id="salesPrice" placeholder="Enter your selling price (e.g., $45)" class="input-salesPrice" required>
+        </div>
+    </div>
+
+    <!-- Middle: Operational Costs, Logistics Fees -->
+    <div class="form-row">
+        <div class="form-group">
+            <label for="operationalCosts" class="label-operationalCosts">Operational Expenses</label>
+            <input type="number" id="operationalCosts" placeholder="Enter your operational costs (e.g., $15000)" class="input-operationalCosts" required>
+        </div>
+        <div class="form-group">
+            <label for="logisticsFees" class="label-logisticsFees">Logistics Fees</label>
+            <input type="number" id="logisticsFees" placeholder="Enter your logistics fees (e.g., $150)" class="input-logisticsFees" required>
+        </div>
+        <div class="form-group"></div> <!-- Boş grup hizalama için -->
+    </div>
+
+    <!-- Bottom: Platform Commissions, Marketing Costs -->
+    <div class="form-row">
+        <div class="form-group">
+            <label for="platformCommissions" class="label-platformCommissions">Platform Commissions</label>
+            <input type="number" id="platformCommissions" placeholder="Enter the commission of your using platform (e.g., $15)" class="input-platformCommissions" required>
+        </div>
+        <div class="form-group">
+            <label for="marketingCosts" class="label-marketingCosts">Marketing Costs</label>
+            <input type="number" id="marketingCosts" placeholder="Enter your marketing costs (e.g., $250)" class="input-marketingCosts" required>
+        </div>
+        <div class="form-group"></div> <!-- Empty group alignment -->
+    </div>
+
+    <button type="button" onclick="testCalculate()">Calculate</button>
+</form>
+
 
     <div id="results">
         <h2>Results</h2>
@@ -101,12 +137,12 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error("Hesaplama sırasında bir hata oluştu.");
+                    throw new Error("Error.");
                 }
 
                 const results = await response.json();
 
-                // Sonuçları güncelle
+                // Update results
                 document.getElementById("totalCosts").textContent = results.totalCosts;
                 document.getElementById("totalRevenue").textContent = results.totalRevenue;
                 document.getElementById("grossProfit").textContent = results.grossProfit;
@@ -116,7 +152,7 @@
                 document.getElementById("suggestedSalesPrice").textContent = results.suggestedSalesPrice;
             } catch (error) {
                 console.error(error);
-                alert("Bir hata oluştu, lütfen tekrar deneyin.");
+                alert("Try again.");
             }
         }
     </script>
