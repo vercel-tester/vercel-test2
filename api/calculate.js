@@ -1,43 +1,70 @@
-export default function handler(req, res) {
-    if (req.method === "POST") {
-        const {
-            unitsSold,
-            productCost,
-            operationalCosts,
-            marketingCosts,
-            logisticsFees,
-            platformCommissions,
-            salesPrice
-        } = req.body;
+// Form elemanlarını ve butonu seçelim
+const form = document.getElementById("calculatorForm");
+const button = document.querySelector("button");
 
+// Formdaki input alanlarını alalım
+const inputs = form.querySelectorAll("input");
 
-        const units = parseInt(unitsSold);
-        const totalProductCost = parseFloat(productCost);
-        const totalOperationalCosts = parseFloat(operationalCosts);
-        const totalMarketingCosts = parseFloat(marketingCosts);
-        const totalLogisticsFees = parseFloat(logisticsFees);
-        const totalPlatformCommissions = parseFloat(platformCommissions);
-        const salesPricePerUnit = parseFloat(salesPrice);
+// Inputlardaki her değişikliği izleyelim
+inputs.forEach(input => {
+    input.addEventListener("input", checkForm);
+});
 
-        // Hesaplamalar
-        const totalCosts = totalProductCost + totalOperationalCosts + totalMarketingCosts + totalLogisticsFees;
-        const totalRevenue = salesPricePerUnit * units;
-        const platformDeductions = totalPlatformCommissions * totalRevenue / 100;
-        const grossProfit = totalRevenue - productCost; 
-        const activityProfit = grossProfit - totalCosts + totalProductCost - platformDeductions ; 
-        const profitMargin = (activityProfit / totalRevenue) * 100; 
-        const costPerUnit = totalCosts / units; 
+// Formu kontrol eden fonksiyon
+function checkForm() {
+    // Eğer tüm inputlar doluysa
+    const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
 
-        res.status(200).json({
-            totalCosts: totalCosts.toFixed(2),
-            totalRevenue: totalRevenue.toFixed(2),
-            platformDeductions: platformDeductions.toFixed(2),
-            grossProfit: grossProfit.toFixed(2),
-            activityProfit: activityProfit.toFixed(2),
-            profitMargin: profitMargin.toFixed(2),
-            costPerUnit: costPerUnit.toFixed(2)
-        });
+    // Eğer tüm inputlar doluysa buton yeşil olacak
+    if (allFilled) {
+        button.style.backgroundColor = "#4CAF50"; // Yeşil renk
     } else {
-        res.status(405).json({ message: "Only POST requests are allowed" });
+        button.style.backgroundColor = "#808080"; // Gri renk
+    }
+}
+
+// Hesaplama işlemi
+async function testCalculate() {
+    const productCost = document.getElementById("productCost").value;
+    const operationalCosts = document.getElementById("operationalCosts").value;
+    const marketingCosts = document.getElementById("marketingCosts").value;
+    const logisticsFees = document.getElementById("logisticsFees").value;
+    const platformCommissions = document.getElementById("platformCommissions").value;
+    const salesPrice = document.getElementById("salesPrice").value;
+    const unitsSold = document.getElementById("unitsSold").value;
+
+    try {
+        const response = await fetch('/api/calculate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                productCost,
+                operationalCosts,
+                marketingCosts,
+                logisticsFees,
+                platformCommissions,
+                salesPrice,
+                unitsSold
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Hesaplama sırasında bir hata oluştu.");
+        }
+
+        const results = await response.json();
+
+        // Sonuçları güncelle
+        document.getElementById("totalCosts").textContent = results.totalCosts;
+        document.getElementById("totalRevenue").textContent = results.totalRevenue;
+        document.getElementById("grossProfit").textContent = results.grossProfit;
+        document.getElementById("activityProfit").textContent = results.activityProfit;
+        document.getElementById("profitMargin").textContent = results.profitMargin + "%";
+        document.getElementById("costPerUnit").textContent = results.costPerUnit;
+    } catch (error) {
+        console.error(error);
+        alert("Bir hata oluştu, lütfen tekrar deneyin.");
     }
 }
