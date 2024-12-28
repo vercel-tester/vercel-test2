@@ -5,6 +5,9 @@ const button = document.querySelector("button");
 // Formdaki input alanlarını alalım
 const inputs = form.querySelectorAll("input");
 
+// İlk başta butonu gri yapalım
+button.style.backgroundColor = "#808080"; // Gri
+
 // Inputlardaki her değişikliği izleyelim
 inputs.forEach(input => {
     input.addEventListener("input", checkForm);
@@ -15,11 +18,13 @@ function checkForm() {
     // Eğer tüm inputlar doluysa
     const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
 
-    // Eğer tüm inputlar doluysa buton yeşil olacak
+    // Eğer tüm inputlar doluysa buton yeşil olacak, aksi takdirde gri
     if (allFilled) {
-        button.style.backgroundColor = "#4CAF50"; // Yeşil renk
+        button.style.backgroundColor = "#4CAF50"; // Yeşil
+        button.disabled = false; // Butonu aktif hale getiriyoruz
     } else {
         button.style.backgroundColor = "#808080"; // Gri renk
+        button.disabled = true; // Butonu pasif yapıyoruz
     }
 }
 
