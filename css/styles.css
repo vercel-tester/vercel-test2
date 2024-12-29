@@ -299,6 +299,8 @@ header {
     color: #333;
 }
 
+
+
 .label-operationalCosts {
     font-weight: 600;
     color: #000;
@@ -311,6 +313,8 @@ header {
     font-family: 'Inter', sans-serif;
     color: #333;
 }
+
+
 
 .label-marketingCosts {
     font-weight: 600;
@@ -358,14 +362,60 @@ header {
     display: block;
 }
 
+/* Varsayılan olarak grid yapısı kullanıyoruz */
 .form-container {
     display: grid;
     gap: 20px; /* Satırlar arası boşluk */
     width: 100%;
     max-width: 800px;
     margin: 0 auto; /* Merkezi hizalama */
-    grid-template-columns: repeat(3, 1fr); /* Tüm satırlarda 3 sütun */
+    grid-template-columns: repeat(3, 1fr); /* 3 sütunlu yapı */
 }
+
+/* 768px ve altı için flexbox ile alt alta sıralama */
+@media (max-width: 768px) {
+    .form-container {
+        display: flex;
+        flex-direction: column; /* Kolon yönünde (alt alta) sıralama */
+        width: 100%; /* Genişlik %100 */
+        gap: 10px; /* Inputlar arasındaki boşluk */
+    }
+}
+
+/* 768px ve altı için flexbox ile alt alta sıralama */
+/* 768px ve altı için flexbox ile alt alta sıralama */
+@media (max-width: 768px) {
+    .form-container {
+        display: flex;
+        flex-direction: column; /* Kolon yönünde (alt alta) sıralama */
+        width: 100%; /* Genişlik %100 */
+        gap: 10px; /* Inputlar arasındaki boşluk */
+        justify-content: flex-start; /* Dikeyde üstten başla */
+        align-items: center; /* Yatayda ortalama */
+        padding: 0 10px; /* Kenarlardan padding ekleyerek içerikleri daha ortalanmış yapalım */
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Her form grubu için ortalama */
+        width: 100%; /* Genişliği %100 yapıyoruz */
+        max-width: 400px; /* Maksimum genişlik ekledik */
+    }
+
+    .form-group label {
+        width: 100%;
+        text-align: center; /* Etiketleri merkeze hizalayalım */
+    }
+
+    .form-group input {
+        width: 100%; /* Input genişliği %100 olacak şekilde ortalanacak */
+        max-width: 200px; /* Maksimum genişlik, 300px'ye kadar */
+        margin: 0 auto; /* Yatayda ortalamak için margin */
+    }
+}
+
+
 
 .form-row {
     display: contents; /* Satır yapısını bozmak için contents kullanıyoruz */
@@ -401,6 +451,12 @@ input {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     color: #000;
+}
+@media (max-width: 768px) {
+    input{
+        width: 100px; 
+        height: 20px; 
+    }
 }
 
 
@@ -440,5 +496,3 @@ input::placeholder {
     font-size: 10px;
     color: #999;  
 }
-
-
